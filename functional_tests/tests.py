@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
 
-MAX_WAIT = 10
+MAX_WAIT = 3
 
 class NewVisitorTest(LiveServerTestCase):
 
@@ -87,7 +87,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser = webdriver.Firefox()
 
         # Francis visits the home page. There is no sign of Edith's list
-        self.browser.get(self.liver_server_url)
+        self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertNotIn('make a faly', page_text)
@@ -96,8 +96,8 @@ class NewVisitorTest(LiveServerTestCase):
         # interesting than Edith...
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy milk')
-        inputbox.send_keys(Keys.Enter)
-        self.wait_for_row_in_list_tabl('1: Buy milk')
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table('1: Buy milk')
         
         # Francis gets hiw own unique URL
         francis_list_url = self.browser.current_url
